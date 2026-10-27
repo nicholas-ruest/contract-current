@@ -1,5 +1,7 @@
 # Contract Current
 
+![Rust](https://img.shields.io/badge/Rust-1.99-000000?logo=rust&logoColor=white) ![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=111827) ![AWS Cedar](https://img.shields.io/badge/AWS-Cedar-FF9900?logo=amazonwebservices&logoColor=white) ![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-verified-2088FF?logo=githubactions&logoColor=white)
+
 ![Contract evolution flow](docs/assets/contract-flow.svg)
 
 Contract Current is an API-evolution control plane for platform teams that need to change a producer contract without surprising transitive consumers. It classifies a proposed schema change, maps consumer impact, retrieves analogous migrations with RuVector, computes input-adaptive ReCIRC risk, authorizes the change with AWS Cedar, emits ordered migration waves, and appends the exact decision to RVF for restart-safe audit.
