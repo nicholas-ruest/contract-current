@@ -1,0 +1,14 @@
+[package]
+name="cc-policy"
+version.workspace=true
+edition.workspace=true
+rust-version.workspace=true
+license.workspace=true
+
+[dependencies]
+cc-cedar={path="../cc-cedar"}
+cc-types={path="../cc-types"}
+cc-errors={path="../cc-errors"}
+
+[lints]
+workspace=true

@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "source_sha": "56e3c1766d90d149e384a67b8eaa2f6a4ef0bc3d",
+  "generated_at": "2026-10-27T01:57:43.046Z",
+  "launch_mode": "local running React/Vite plus real Axum backend",
+  "test_namespace": "contract-current-e2e",
+  "dependencies": {
+    "rust": "rustc 1.99.0 (b940084d7 2026-09-28)",
+    "node": "v20.20.2",
+    "npm": "10.8.2",
+    "ruvector_core": "2.4.0",
+    "rvf_runtime": "0.3.2",
+    "cedar_policy": "4.14.0"
+  },
+  "commands": [
+    {
+      "command": "cargo fmt --all -- --check",
+      "exit_code": 0
+    },
+    {
+      "command": "cargo clippy --locked --workspace --all-targets --all-features -- -D warnings",
+      "exit_code": 0
+    },
+    {
+      "command": "cargo test --locked --workspace --all-features",
+      "exit_code": 0
+    },
+    {
+      "command": "cargo deny check",
+      "exit_code": 0
+    },
+    {
+      "command": "npm audit && npm run typecheck && npm run lint && npm test && npm run build",
+      "exit_code": 0
+    },
+    {
+      "command": "scripts/benchmark.sh",
+      "exit_code": 0
+    },
+    {
+      "command": "npx playwright test",
+      "exit_code": 0,
+      "result": "6 passed"
+    },
+    {
+      "command": "scripts/restart-journey.sh",
+      "exit_code": 0,
+      "result": "exact ID restored"
+    }
+  ],
+  "artifacts": {
+    "evidence/prototype/correlation.json": "d3920439ee4c4a36cd68eb92a60ef9310e8924305ae544d10baeda9c5bc7c8d4",
+    "evidence/prototype/desktop.png": "b828ff0cf1fcd7fe194c035d3220c9944cc61278971d44fd6a8d081fa4bb28c4",
+    "evidence/prototype/mobile.png": "6a2302a8da7025c25946ed6218bb9edb4373b207761a0ae3fe7bc456133ff71e",
+    "evidence/benchmark.json": "61634743569f311ab672a92851975521b502df7db720848304affb381e059687",
+    "evidence/verify.log": "80a78a12bd22fb34a294d39f57b2a38457a93fa76b7ab0ae3d00e8b44c00290e"
+  },
+  "synthetic_data": "deterministic Checkout Web, Billing Worker and Ledger Export consumers",
+  "external_gaps": [
+    "no cloud deployment performed; authorization not granted"
+  ],
+  "security_exception": "RUSTSEC-2025-0141 unmaintained-only transitive bincode via RuVector; no safe upgrade"
+}

@@ -1,0 +1,8 @@
+FROM rust:1.99-bookworm AS build
+WORKDIR /app
+COPY . .
+RUN cargo build --locked --release -p cc-cli
+FROM debian:bookworm-slim
+COPY --from=build /app/target/release/cc-cli /usr/local/bin/contract-current
+EXPOSE 18080
+CMD ["contract-current"]

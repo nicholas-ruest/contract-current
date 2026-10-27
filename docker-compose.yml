@@ -1,0 +1,11 @@
+services:
+  api:
+    build: {context: ., dockerfile: Dockerfile.backend}
+    environment: {CC_BIND: '0.0.0.0:18080', CC_DATA: '/data/decisions.rvf', CC_TOKEN: 'demo-token'}
+    volumes: [contract_current_data:/data]
+    ports: ['18080:18080']
+  web:
+    build: {context: ., dockerfile: Dockerfile.frontend}
+    ports: ['5173:80']
+    depends_on: [api]
+volumes: {contract_current_data: {}}

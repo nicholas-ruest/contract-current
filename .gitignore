@@ -1,0 +1,8 @@
+target/
+frontend/node_modules/
+frontend/dist/
+frontend/playwright-report/
+frontend/test-results/
+data/
+*.log
+evidence/verify.exit

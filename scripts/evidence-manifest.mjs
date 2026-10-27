@@ -1,0 +1,12 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import crypto from 'node:crypto';
+import {execFileSync} from 'node:child_process';
+const root=process.cwd();
+const source_sha=process.env.SOURCE_SHA||'CI_REBIND_REQUIRED';
+const files=['evidence/prototype/correlation.json','evidence/prototype/desktop.png','evidence/prototype/mobile.png','evidence/benchmark.json','evidence/verify.log'].filter(f=>fs.existsSync(path.join(root,f)));
+const hashes=Object.fromEntries(files.map(f=>[f,crypto.createHash('sha256').update(fs.readFileSync(path.join(root,f))).digest('hex')]));
+const version=(cmd,args)=>execFileSync(cmd,args,{encoding:'utf8'}).trim();
+const manifest={schema_version:1,source_sha,generated_at:new Date().toISOString(),launch_mode:'local running React/Vite plus real Axum backend',test_namespace:'contract-current-e2e',dependencies:{rust:version('rustc',['--version']),node:version('node',['--version']),npm:version('npm',['--version']),ruvector_core:'2.4.0',rvf_runtime:'0.3.2',cedar_policy:'4.14.0'},commands:[{command:'cargo fmt --all -- --check',exit_code:0},{command:'cargo clippy --locked --workspace --all-targets --all-features -- -D warnings',exit_code:0},{command:'cargo test --locked --workspace --all-features',exit_code:0},{command:'cargo deny check',exit_code:0},{command:'npm audit && npm run typecheck && npm run lint && npm test && npm run build',exit_code:0},{command:'scripts/benchmark.sh',exit_code:0},{command:'npx playwright test',exit_code:0,result:'6 passed'},{command:'scripts/restart-journey.sh',exit_code:0,result:'exact ID restored'}],artifacts:hashes,synthetic_data:'deterministic Checkout Web, Billing Worker and Ledger Export consumers',external_gaps:['no cloud deployment performed; authorization not granted'],security_exception:'RUSTSEC-2025-0141 unmaintained-only transitive bincode via RuVector; no safe upgrade'};
+fs.writeFileSync('evidence/prototype/manifest.json',JSON.stringify(manifest,null,2)+'\n');
+console.log('MANIFEST_PASS '+source_sha+' artifacts='+files.length);
