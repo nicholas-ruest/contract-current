@@ -1,0 +1,29 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: contract-current
+spec:
+  template:
+    metadata:
+      annotations:
+        autoscaling.knative.dev/maxScale: "4"
+    spec:
+      serviceAccountName: AUTHORIZED_IAM_SERVICE_ACCOUNT
+      containers:
+        - image: IMAGE_REQUIRES_AUTHORIZED_PUBLISH
+          ports:
+            - containerPort: 8080
+          env:
+            - name: CC_BIND
+              value: 0.0.0.0:8080
+            - name: CC_DATA
+              value: /tmp/decisions.rvf
+            - name: CC_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  key: latest
+                  name: contract-current-token
+          startupProbe:
+            httpGet:
+              path: /readyz
+              port: 8080

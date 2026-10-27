@@ -1,0 +1,16 @@
+openapi: 3.1.0
+info: {title: Contract Current API, version: 1.0.0}
+servers: [{url: http://127.0.0.1:18080}]
+paths:
+  /healthz:
+    get: {responses: {'200': {description: Ready}}}
+  /v1/changes:
+    get: {security: [{bearerAuth: []}], responses: {'200': {description: MigrationDecisions}}}
+    post:
+      security: [{bearerAuth: []}]
+      requestBody: {required: true, content: {application/json: {schema: {$ref: '#/components/schemas/CreateMigrationDecision'}}}}
+      responses: {'201': {description: Issued}, '403': {description: Denied}, '422': {description: Invalid}}
+components:
+  securitySchemes: {bearerAuth: {type: http, scheme: bearer}}
+  schemas:
+    CreateMigrationDecision: {type: object, required: [revision, change_class], properties: {revision: {type: string, minLength: 12}, change_class: {type: string, enum: [public, internal, restricted]}}}

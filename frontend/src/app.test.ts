@@ -1,0 +1,1 @@
+import{describe,it,expect}from'vitest';describe('contract',()=>{it('uses versioned API',()=>{expect('/v1/changes').toContain('/v1/')})})

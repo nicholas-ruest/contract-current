@@ -1,0 +1,13 @@
+[package]
+name="cc-seed"
+version.workspace=true
+edition.workspace=true
+rust-version.workspace=true
+license.workspace=true
+
+[dependencies]
+cc-consumer={path="../cc-consumer"}
+cc-types={path="../cc-types"}
+
+[lints]
+workspace=true

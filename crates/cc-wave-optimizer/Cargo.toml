@@ -1,0 +1,17 @@
+[package]
+name="cc-wave-optimizer"
+version.workspace=true
+edition.workspace=true
+rust-version.workspace=true
+license.workspace=true
+
+[dependencies]
+cc-migration-plan={path="../cc-migration-plan"}
+cc-types={path="../cc-types"}
+cc-errors={path="../cc-errors"}
+
+[lints]
+workspace=true
+
+[dev-dependencies]
+cc-consumer={path="../cc-consumer"}

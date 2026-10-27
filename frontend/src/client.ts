@@ -1,0 +1,4 @@
+export type MigrationDecision={id:string;revision:{text:string;change_class:string};impacts:{id:string;role:string}[];consumers:{id:string;name:string;score:number}[];risk:number;contract_hash:string;status:string;correlation_id:string};
+const headers=(token:string)=>({Authorization:'Bearer '+token,'Content-Type':'application/json','X-Correlation-Id':crypto.randomUUID()});
+export async function createMigrationDecision(token:string,revision:string,change_class:string):Promise<MigrationDecision>{const r=await fetch('http://127.0.0.1:18080/v1/changes',{method:'POST',headers:headers(token),body:JSON.stringify({revision,change_class})});const b=await r.json();if(!r.ok)throw new Error(b.message??'Request failed');return b}
+export async function listMigrationDecisions(token:string):Promise<MigrationDecision[]>{const r=await fetch('http://127.0.0.1:18080/v1/changes',{headers:headers(token)});if(!r.ok)throw new Error('Could not load audit');return r.json()}

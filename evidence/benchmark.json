@@ -1,0 +1,51 @@
+[
+  {
+    "mode": "combined",
+    "success": true,
+    "recall": true,
+    "restart_retrieval": true,
+    "policy_denial": true
+  },
+  {
+    "mode": "ruvnet_only",
+    "success": true,
+    "recall": true,
+    "restart_retrieval": true,
+    "policy_denial": false
+  },
+  {
+    "mode": "enterprise_only",
+    "success": true,
+    "recall": false,
+    "restart_retrieval": false,
+    "policy_denial": true
+  },
+  {
+    "mode": "without_ruvector",
+    "success": true,
+    "recall": false,
+    "restart_retrieval": true,
+    "policy_denial": true
+  },
+  {
+    "mode": "without_rvf",
+    "success": true,
+    "recall": true,
+    "restart_retrieval": false,
+    "policy_denial": true
+  },
+  {
+    "mode": "without_cedar-policy",
+    "success": true,
+    "recall": true,
+    "restart_retrieval": true,
+    "policy_denial": false
+  },
+  {
+    "mode": "without_calibration",
+    "success": false,
+    "recall": true,
+    "restart_retrieval": true,
+    "policy_denial": true
+  }
+]

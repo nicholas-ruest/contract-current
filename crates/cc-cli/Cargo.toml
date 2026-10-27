@@ -1,0 +1,17 @@
+[package]
+name="cc-cli"
+version.workspace=true
+edition.workspace=true
+rust-version.workspace=true
+license.workspace=true
+
+[dependencies]
+cc-api={path="../cc-api"}
+cc-config={path="../cc-config"}
+cc-errors={path="../cc-errors"}
+tokio={workspace=true}
+clap={workspace=true}
+tracing-subscriber={workspace=true}
+
+[lints]
+workspace=true
