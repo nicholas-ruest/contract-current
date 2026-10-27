@@ -19,7 +19,9 @@ jobs:
       - name: Bind exact candidate evidence
         run: |
           SOURCE_SHA="$GITHUB_SHA" node scripts/evidence-manifest.mjs
-          sed -i "s/CI_REBIND_REQUIRED/$GITHUB_SHA/g" evidence/semantic-review.md
+          sed -E -i "s/Candidate: .*/Candidate: \`$GITHUB_SHA\`/" evidence/semantic-review.md
+          grep -F "$GITHUB_SHA" evidence/semantic-review.md
+          grep -F "$GITHUB_SHA" evidence/prototype/manifest.json
       - name: Containerized full-stack acceptance
         run: |
           docker compose up -d --build
